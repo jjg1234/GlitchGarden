@@ -7,12 +7,17 @@ public class SoundManager : MonoBehaviour {
 
 	public AudioClip[] m_LevelMusicArray;
 	private AudioSource p_AudioSource;
+	const int OPTION_LEVEL = 2;
 
 	private void OnLevelWasLoaded(int level)
-	{	
-		p_AudioSource.clip = m_LevelMusicArray[level];
-		p_AudioSource.loop = true;
-		p_AudioSource.Play();
+	{
+		if (level != OPTION_LEVEL)
+		{
+			p_AudioSource.clip = m_LevelMusicArray[level];
+			p_AudioSource.loop = true;
+			p_AudioSource.Play();
+		}
+		
 	}
 
 	private void Awake()
@@ -23,9 +28,9 @@ public class SoundManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		gameObject.GetComponent<AudioSource>().volume = PlayerPrefManager.GetMasterVolume();
 
-		
+
 	}
 	
 	// Update is called once per frame

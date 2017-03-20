@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour {
 	{
 		if (SceneManager.GetActiveScene().buildIndex == 0)
 		{
-			Invoke("LoadNextLevel", 5.0f);
+			Invoke("LoadNextLevel", 4.0f);
 		}
 	}
 
