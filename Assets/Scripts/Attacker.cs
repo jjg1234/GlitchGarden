@@ -7,7 +7,7 @@ public class Attacker : MonoBehaviour
 
 	[Range(-1f, 1.5f)]
 	public float m_WalkSpeed;
-
+	public float m_Life;
 	public GameObject m_Target;
 
 	// Use this for initialization
@@ -16,17 +16,6 @@ public class Attacker : MonoBehaviour
 
 	}
 
-	//public void OnTriggerEnter2D(Collider2D collision)
-	//{
-	//	Debug.Log("I, " + gameObject.name + ", collided with " + collision.gameObject.name + " in trigger mode");
-	//	m_Target = collision.gameObject;
-
-	//	if (collision.gameObject.tag == "Defender")
-	//	{
-	//		GetComponent<Animator>().SetBool("isAttacking", true);
-	//	}
-	//}
-
 	public void SetSpeed(float _speed)
 	{
 		m_WalkSpeed = _speed;
@@ -34,7 +23,16 @@ public class Attacker : MonoBehaviour
 
 	public void StrikeCurrentTarget(float _damage)
 	{
-		Debug.Log("I, " + gameObject.name + ", attack " + m_Target.name + " and deal him  " + _damage + " damage");
+		if (m_Target != null)
+		{
+			Debug.Log("I, " + gameObject.name + ", attack " + m_Target.name + " and deal him  " + _damage + " damage");
+			m_Target.GetComponent<Defender>().TakeDammage(_damage);
+		}
+		else
+		{
+			GetComponent<Animator>().SetBool("isAttacking", false);
+		}
+
 	}
 
 
@@ -43,4 +41,15 @@ public class Attacker : MonoBehaviour
 	{
 		transform.Translate(Vector3.left * m_WalkSpeed * Time.deltaTime);
 	}
+
+	public void Damage(float _damage)
+	{
+		m_Life -= _damage;
+
+		if (m_Life <= 0)
+		{
+			Destroy(gameObject);
+		}
+	}
+
 }
