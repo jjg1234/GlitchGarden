@@ -34,7 +34,21 @@ public class Attacker : MonoBehaviour
 
 	public void StrikeCurrentTarget(float _damage)
 	{
-		Debug.Log("I, " + gameObject.name + ", attack " + m_Target.name + " and deal him  " + _damage + " damage");
+		
+		if (m_Target != null)
+		{
+			Debug.Log("I, " + gameObject.name + ", attack " + m_Target.name + " and deal him  " + _damage + " damage");
+
+			if (m_Target.GetComponent<Defender>())
+			{
+				m_Target.GetComponent<Defender>().TakeDammage(_damage);
+			}
+		}
+		else
+		{
+			GetComponent<Animator>().SetBool("isAttacking", false);
+		}
+		
 	}
 
 
