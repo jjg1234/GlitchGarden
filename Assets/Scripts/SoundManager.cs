@@ -9,11 +9,21 @@ public class SoundManager : MonoBehaviour {
 	private AudioSource p_AudioSource;
 	const int OPTION_LEVEL = 2;
 
-	private void OnLevelWasLoaded(int level)
+	private void OnEnable()
 	{
-		if (level != OPTION_LEVEL)
+		SceneManager.sceneLoaded += OnLevelFinishedLoading;
+	}
+
+	private void OnDisable()
+	{
+		SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+	}
+
+	private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)//int level)
+	{
+		if (scene.buildIndex != OPTION_LEVEL)
 		{
-			p_AudioSource.clip = m_LevelMusicArray[level];
+			p_AudioSource.clip = m_LevelMusicArray[scene.buildIndex];
 			p_AudioSource.loop = true;
 			p_AudioSource.Play();
 		}
