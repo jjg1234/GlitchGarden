@@ -26,7 +26,7 @@ public class Attacker : MonoBehaviour
 		if (m_Target != null)
 		{
 			Debug.Log("I, " + gameObject.name + ", attack " + m_Target.name + " and deal him  " + _damage + " damage");
-			m_Target.GetComponent<Defender>().TakeDammage(_damage);
+			m_Target.GetComponent<Health>().TakeDamage(_damage);
 		}
 		else
 		{
@@ -42,14 +42,6 @@ public class Attacker : MonoBehaviour
 		transform.Translate(Vector3.left * m_WalkSpeed * Time.deltaTime);
 	}
 
-	public void Damage(float _damage)
-	{
-		m_Life -= _damage;
-
-		if (m_Life <= 0)
-		{
-			Destroy(gameObject);
-		}
-	}
+	
 
 }
