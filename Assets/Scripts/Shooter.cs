@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour {
 
-	public GameObject m_Projectile, m_ProjectileParent;
+	public  GameObject m_ProjectileParent;
+	public GameObject m_Projectile ;
+
+	private void Start()
+	{
+		m_ProjectileParent = GameObject.Find("Projectiles");
+
+		if (!m_ProjectileParent)
+		{
+			m_ProjectileParent = new GameObject("Projectiles");
+		}
+	}
 
 	private void Fire()
 	{
