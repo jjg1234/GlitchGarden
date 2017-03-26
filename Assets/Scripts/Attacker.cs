@@ -9,6 +9,8 @@ public class Attacker : MonoBehaviour
 	public float m_WalkSpeed;
 	public float m_Life;
 	public GameObject m_Target;
+	[Tooltip("Average number seconds between to spawns")]
+	public float m_SeenEverySeconds;
 
 	// Use this for initialization
 	void Start()
@@ -25,7 +27,7 @@ public class Attacker : MonoBehaviour
 	{
 		if (m_Target != null)
 		{
-			Debug.Log("I, " + gameObject.name + ", attack " + m_Target.name + " and deal him  " + _damage + " damage");
+			//Debug.Log("I, " + gameObject.name + ", attack " + m_Target.name + " and deal him  " + _damage + " damage");
 			m_Target.GetComponent<Health>().TakeDamage(_damage);
 		}
 		else
@@ -41,6 +43,7 @@ public class Attacker : MonoBehaviour
 	{
 		transform.Translate(Vector3.left * m_WalkSpeed * Time.deltaTime);
 	}
+
 
 	
 

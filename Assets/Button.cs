@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Button : MonoBehaviour {
 
-	public static Button s_SelectedButton;
+	public static GameObject s_SelectedDefender;
+	public GameObject DefenderPrefab;
 	bool m_IsSelected;
 
 	// Use this for initialization
@@ -25,7 +26,7 @@ public class Button : MonoBehaviour {
 			foreach (var item in FindObjectsOfType<Button>())
 			{
 				item.Deselect();
-				s_SelectedButton = null;
+				s_SelectedDefender = null;
 			}
 		}
 		else
@@ -35,9 +36,9 @@ public class Button : MonoBehaviour {
 				item.Deselect();
 			}
 
-			s_SelectedButton = this;
+			s_SelectedDefender = DefenderPrefab;
 			m_IsSelected = true;
-			Debug.Log("button " + name);
+			//Debug.Log("button " + name);
 			GetComponent<SpriteRenderer>().color = Color.white;
 		}
 		

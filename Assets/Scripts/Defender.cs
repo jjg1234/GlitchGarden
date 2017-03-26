@@ -7,7 +7,7 @@ public class Defender : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		Debug.Log("I, " + gameObject.name + ", collided with " + collision.gameObject.name + " in trigger mode");
+		//Debug.Log("I, " + gameObject.name + ", collided with " + collision.gameObject.name + " in trigger mode");
 	}
 
 	
