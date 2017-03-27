@@ -30,7 +30,7 @@ public class Fox : MonoBehaviour
 			}
 			else
 			{
-				m_Attacker.m_Target = collision.gameObject;
+				m_Attacker.SetTarget(collision.gameObject);
 				m_Animator.SetBool("isAttacking", true);
 			}
 

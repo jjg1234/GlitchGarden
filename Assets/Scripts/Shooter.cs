@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooter : MonoBehaviour
-{
-
-	public GameObject m_ProjectileParent;
+{ 
+	[Tooltip("Prefab of the Projectile that the Shooter will launch.")]
 	public GameObject m_Projectile;
+
 	private Animator m_Animator;
+	private GameObject m_ProjectileParent;
 
 	private void Start()
 	{
@@ -33,55 +34,44 @@ public class Shooter : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Check if an Attaker is at the right of the Shooter
+	/// </summary>
+	/// <returns>true if there is an Attacker at the right of the Shooter</returns>
 	private bool IsAttackerAheadInLane()
-	{
-		//RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.right),Mathf.Infinity, LayerMask.NameToLayer("Attackers"));
-
-		//if (hit.collider != null)
-		//{
-		//	if (hit.collider.tag == "Attackers")
-		//	{
-		//		Debug.Log("Raycast found " + hit.collider.name);
-		//		//Can be usefull if the shooter have a maximum range
-		//		float distance = Mathf.Abs(hit.point.x - transform.position.x);
-
-
-		//		return true;
-
-		//	}
-			
-			
-
-		//}
-
-		//return false;
-
-
-		
-		RaycastHit2D hit01 = Physics2D.Raycast(transform.position, new Vector2(1,0), Mathf.Infinity);
-
-
-		//------------------------------------------------
+	{	
+		//Set direction to x>0
 		Vector2 direction = transform.TransformDirection(Vector2.right);
+
+		//Get all Hits into an array
 		RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, direction, 10 - Mathf.Ceil(transform.position.x));
 
-		if (hit01.transform != null)
+		//If there is at leat one hit
+		if (hit != null)
 		{
+			//Search trhough all hits
 			foreach (RaycastHit2D gameObjectHit in hit)
 			{
+				//If it's an Attacker
 				if (gameObjectHit.transform.tag == "Attackers")
 				{
-					
+					//The we have an attaker ahead in line
 					return true;
 				}
 			}
 		}
+		//No Attacker found
 		return false;
 	}
 
+	/// <summary>
+	/// Fire an instance of the projectile Prefab
+	/// </summary>
 	private void Fire()
 	{
+		//Instanciate a projectile from Prefab
 		GameObject projectile = Instantiate(m_Projectile, transform.FindChild("Gun").transform.position, new Quaternion());
+		//Set the Projectile parent for readability
 		projectile.transform.parent = m_ProjectileParent.transform;
 	}
 

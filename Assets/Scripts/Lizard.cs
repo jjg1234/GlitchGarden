@@ -21,7 +21,7 @@ public class Lizard : MonoBehaviour
 		
 		if (collision.gameObject.GetComponent<Defender>())
 		{
-			m_Attacker.m_Target = collision.gameObject;
+			m_Attacker.SetTarget(collision.gameObject);
 			m_Animator.SetBool("isAttacking", true);
 		}
 	}
