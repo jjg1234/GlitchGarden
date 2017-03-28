@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Attacker))]
 public class Fox : MonoBehaviour
 {
-
 	private Animator m_Animator;
 	private Attacker m_Attacker;
 
@@ -15,17 +14,12 @@ public class Fox : MonoBehaviour
 		m_Attacker = GetComponent<Attacker>();
 	}
 
-
 	public void OnTriggerEnter2D(Collider2D collision)
 	{
-		//Debug.Log("I, " + gameObject.name + ", collided with " + collision.gameObject.name + " in trigger mode");
-
-
 		if (collision.gameObject.GetComponent<Defender>())
 		{
 			if (collision.gameObject.GetComponent<Stone>())
 			{
-				Debug.Log("I Jump");
 				m_Animator.SetTrigger("Jump");
 			}
 			else
@@ -33,9 +27,6 @@ public class Fox : MonoBehaviour
 				m_Attacker.SetTarget(collision.gameObject);
 				m_Animator.SetBool("isAttacking", true);
 			}
-
 		}
-
 	}
-
 }

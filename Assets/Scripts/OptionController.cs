@@ -9,7 +9,6 @@ public class OptionController : MonoBehaviour {
 	public LevelManager m_LevelManager;
 	public Text m_VolumeTextValue,m_DifficultyTextValue;
 
-
 	private enum DifficultyLevels { Easy,Normal,Hard,Nightmare }
 
 	// Use this for initialization

@@ -3,17 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator), typeof(Defender))]
 public class Shooter : MonoBehaviour
-{ 
+{
 	[Tooltip("Prefab of the Projectile that the Shooter will launch.")]
 	public GameObject m_Projectile;
 
 	private Animator m_Animator;
 	private GameObject m_ProjectileParent;
 
+	/// <summary>
+	/// Initialisation :
+	/// Taking Animator and Instanciate Parent if do not exists
+	/// </summary>
 	private void Start()
 	{
+		//Initialize Animator
 		m_Animator = GetComponent<Animator>();
+
+		//Initialize Parent
 		m_ProjectileParent = GameObject.Find("Projectiles");
 
 		if (!m_ProjectileParent)
@@ -22,16 +30,14 @@ public class Shooter : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Called every frame
+	/// Check if Attacker in sight and set animator to Attack state
+	/// </summary>
 	private void Update()
 	{
-		if (IsAttackerAheadInLane())
-		{
-			m_Animator.SetBool("EnemyInSight", true);
-		}
-		else
-		{
-			m_Animator.SetBool("EnemyInSight", false);
-		}
+		//Activate attack mode if an enemy is in sight
+		m_Animator.SetBool("EnemyInSight", IsAttackerAheadInLane());
 	}
 
 	/// <summary>
@@ -39,7 +45,7 @@ public class Shooter : MonoBehaviour
 	/// </summary>
 	/// <returns>true if there is an Attacker at the right of the Shooter</returns>
 	private bool IsAttackerAheadInLane()
-	{	
+	{
 		//Set direction to x>0
 		Vector2 direction = transform.TransformDirection(Vector2.right);
 

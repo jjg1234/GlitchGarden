@@ -28,6 +28,4 @@ public class PlayerPrefManager : MonoBehaviour
 	{
 		return PlayerPrefs.GetInt(DIFFICULTY_KEY);
 	}
-
-
 }

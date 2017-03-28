@@ -5,33 +5,31 @@ using UnityEngine;
 public class DefenderSpawner : MonoBehaviour {
 
 	private GameObject m_DefenderParents;
-
+	private Camera m_MainCamera;
+	private StarDisplay m_StarDisplay;
 	// Use this for initialization
 	void Start () {
+		m_MainCamera = GameObject.FindObjectOfType<Camera>();
+		m_StarDisplay = GameObject.FindObjectOfType<StarDisplay>();
 		m_DefenderParents = GameObject.Find("Defenders");
 
 		if (!m_DefenderParents)
 		{
 			m_DefenderParents = new GameObject("Defenders");
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	}	
 
 	private void OnMouseDown()
 	{
 		Vector2 ClickPositionInWorldUnit = CalculateWorldPointFromClickPosition();
-		//Debug.Log(ClickPositionInWorldUnit);
-		//Debug.Log(SnapToGrid(ClickPositionInWorldUnit));
-
 
 		if (Button.s_SelectedDefender)
 		{
-			GameObject defender =  Instantiate(Button.s_SelectedDefender, SnapToGrid(ClickPositionInWorldUnit), new Quaternion());
-			defender.transform.parent = m_DefenderParents.transform;
+			if (m_StarDisplay.UseStars(Button.s_SelectedDefender.GetComponent<Defender>().GetCost()))
+			{
+				GameObject defender = Instantiate(Button.s_SelectedDefender, SnapToGrid(ClickPositionInWorldUnit), new Quaternion());
+				defender.transform.parent = m_DefenderParents.transform;
+			}
 		}
 	}
 
@@ -42,8 +40,7 @@ public class DefenderSpawner : MonoBehaviour {
 
 	Vector2 CalculateWorldPointFromClickPosition()
 	{
-		Vector3 myClickPosition3D = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(Input.mousePosition);
+		Vector3 myClickPosition3D = m_MainCamera.ScreenToWorldPoint(Input.mousePosition);
 		return new Vector2(myClickPosition3D.x, myClickPosition3D.y);
-
 	}
 }

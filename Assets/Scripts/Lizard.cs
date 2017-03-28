@@ -17,8 +17,6 @@ public class Lizard : MonoBehaviour
 
 	public void OnTriggerEnter2D(Collider2D collision)
 	{
-		//Debug.Log("I, " + gameObject.name + ", collided with " + collision.gameObject.name + " in trigger mode");
-		
 		if (collision.gameObject.GetComponent<Defender>())
 		{
 			m_Attacker.SetTarget(collision.gameObject);

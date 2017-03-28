@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-
 	public GameObject[] m_SpawnablesPrefabs;
-
 
 	// Update is called once per frame
 	void Update()
@@ -22,7 +20,6 @@ public class Spawner : MonoBehaviour {
 
 	public void Spawn(GameObject _toSpawn)
 	{
-
 		GameObject newAttacker = Instantiate(_toSpawn,transform.position,new Quaternion());
 		newAttacker.transform.parent = transform;
 	}
@@ -30,14 +27,7 @@ public class Spawner : MonoBehaviour {
 	bool isTimeToSpawnJJG(GameObject _toSpawn)
 	{
 		float spawnRate = _toSpawn.GetComponent<Attacker>().m_SeenEverySeconds;
-
-		if (Time.timeSinceLevelLoad % spawnRate <= 0.01)
-		{
-			return true;
-		}
-
-		return false;
-
+		return Time.timeSinceLevelLoad % spawnRate <= 0.01;
 	}
 
 	bool isTimeToSpawn(GameObject _toSpawn)
@@ -54,7 +44,6 @@ public class Spawner : MonoBehaviour {
 		float Threshold = spawnPerSec * Time.deltaTime / 5; // /5 is because there is 5 Lanes
 
 		return Random.value < Threshold;
-
 	}
 }
 

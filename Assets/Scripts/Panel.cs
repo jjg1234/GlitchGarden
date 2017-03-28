@@ -9,9 +9,5 @@ public class Panel : MonoBehaviour {
 	void Start () {
 		gameObject.GetComponent<Image>().CrossFadeAlpha(0, 3, true);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

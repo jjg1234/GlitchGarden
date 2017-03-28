@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class Defender : MonoBehaviour {
 
+	public int m_Cost;
+	private StarDisplay m_StarDisplay;
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	private void Start()
 	{
-		//Debug.Log("I, " + gameObject.name + ", collided with " + collision.gameObject.name + " in trigger mode");
+		m_StarDisplay = GameObject.FindObjectOfType<StarDisplay>();
 	}
 
-	
-
-
-	// Use this for initialization
-	void Start () {
-		
+	public void AddStars(int _amount)
+	{
+		m_StarDisplay.AddStars(_amount);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public int GetCost()
+	{
+		return m_Cost;
 	}
+
 }

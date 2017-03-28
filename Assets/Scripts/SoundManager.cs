@@ -27,7 +27,6 @@ public class SoundManager : MonoBehaviour {
 			p_AudioSource.loop = true;
 			p_AudioSource.Play();
 		}
-		
 	}
 
 	private void Awake()
@@ -39,12 +38,5 @@ public class SoundManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameObject.GetComponent<AudioSource>().volume = PlayerPrefManager.GetMasterVolume();
-
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }
