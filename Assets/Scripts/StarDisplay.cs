@@ -24,14 +24,29 @@ public class StarDisplay : MonoBehaviour
 
 	private void Start()
 	{
+		Initialize();
+	}
+
+	public void Initialize()
+	{
 		m_Text = GetComponent<Text>();
 		m_StarsAmount = 500;
+
 	}
 
 	public void AddStars(int _amount)
 	{
 		m_StarsAmount += _amount;
-		//m_Text.text = ""+m_StarsAmount;
+	}
+
+	public int GetStars()
+	{
+		return m_StarsAmount;
+	}
+
+	public string GetStarsDisplay()
+	{
+		return m_Text.text;
 	}
 
 	public bool UseStars(int _amount)
