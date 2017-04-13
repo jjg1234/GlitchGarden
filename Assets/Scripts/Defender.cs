@@ -22,4 +22,13 @@ public class Defender : MonoBehaviour {
 		return m_Cost;
 	}
 
+	private void OnMouseDown()
+	{
+		if (Button.SellingSelected)
+		{
+			AddStars(m_Cost / 3);
+			Destroy(gameObject);
+		}
+	}
+
 }

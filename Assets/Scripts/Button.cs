@@ -24,6 +24,12 @@ public class Button : MonoBehaviour
 	private bool m_IsSelected;
 
 	/// <summary>
+	/// Bollean value telling if we are trying to sell something
+	/// </summary>
+	public static bool SellingSelected = false;
+
+
+	/// <summary>
 	/// Sprite renderer to handle color
 	/// </summary>
 	private SpriteRenderer m_MySpriteRenderer;
@@ -41,8 +47,11 @@ public class Button : MonoBehaviour
 		m_AllButtonArray = FindObjectsOfType<Button>();
 		m_MySpriteRenderer = GetComponent<SpriteRenderer>();
 		setColor(Color.gray);
-		m_Cost = GetComponentInChildren<Text>();
-		m_Cost.text = m_DefenderPrefab.GetComponent<Defender>().GetCost().ToString();
+		if (m_DefenderPrefab)
+		{
+			m_Cost = GetComponentInChildren<Text>();
+			m_Cost.text = m_DefenderPrefab.GetComponent<Defender>().GetCost().ToString();
+		}
 	}
 
 	private void OnMouseDown()
@@ -51,9 +60,20 @@ public class Button : MonoBehaviour
 
 		if (!m_IsSelected)
 		{
-			s_SelectedDefender = m_DefenderPrefab;
-			m_IsSelected = true;
-			m_MySpriteRenderer.color = Color.white;
+			if (m_DefenderPrefab)
+			{
+				s_SelectedDefender = m_DefenderPrefab;
+				m_IsSelected = true;
+				m_MySpriteRenderer.color = Color.white;
+				SellingSelected = false;
+			}
+			else
+			{
+				m_IsSelected = true;
+				m_MySpriteRenderer.color = Color.white;
+				SellingSelected = true;
+			}
+			
 		}
 
 	}
